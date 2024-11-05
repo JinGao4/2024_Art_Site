@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Art;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ArtController extends Controller
 {
@@ -12,7 +13,8 @@ class ArtController extends Controller
      */
     public function index()
     {
-        //
+        $arts = Art::all();//Fetch all art
+        return view('arts.index', compact('arts')); // return the view with arts
     }
 
     /**

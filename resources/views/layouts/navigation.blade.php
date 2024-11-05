@@ -10,10 +10,13 @@
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
+                <!-- Navigation Links --> <!-- this show this page for the title -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('arts.index')" :active="request()->routeIs('arts.index')">
+                        {{ __('View Art Pieces') }}
                     </x-nav-link>
                 </div>
             </div>
