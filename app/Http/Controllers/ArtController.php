@@ -30,7 +30,33 @@ class ArtController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /** inputs */
+        $request->validate([
+            'title'=>'required',
+            'about'=>'required|max: 500',
+            'artistname'=>'required|max: 20',
+            'image'=>'required|imaeg|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        /** check if it uploaded the image and handle it */
+        if ($request->hasFile('image')){
+
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images/arts'), $imageName);
+        }
+
+        /** create new art record in database */
+        Art::create([
+            'title'=> $request->title,
+            'about'=> $request->about,
+            'artistname'=> $request -> artistname,
+            'image'=> $imageName, /** store imge URL in DB */
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        /** Redirect to index with a success message */
+        return to_route('arts.index')->with('success','art piece have being created successfully.');
     }
 
     /**

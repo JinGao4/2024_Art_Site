@@ -1,3 +1,21 @@
-<div>
-    <!-- Live as if you were to die tomorrow. Learn as if you were to live forever. - Mahatma Gandhi -->
-</div>
+<x-app-layout>
+    <x-slot name='header'>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight ">
+            {{ __('Create New Art') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <h3 class="front-semibold text-lg mb-4">Add a new Art piece:</h3>
+                        <x-art-form
+                            :action="route('arts.store')"
+                            :method="'POST'"
+                        />
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
