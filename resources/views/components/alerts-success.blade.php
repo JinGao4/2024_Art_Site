@@ -1,3 +1,9 @@
-<div>
-    <!-- It is not the man who has too little, but the man who craves more, that is poor. - Seneca -->
+@if(session('success'))
+<div class="mb-4 px-4 py-2 bg-green-100 border-green-500 text-green-700 rounded-md">
+    {{$slot}}
 </div>
+@endif
+
+<x-alert-success>
+    {{session('success')}}
+</x-alert-success>
