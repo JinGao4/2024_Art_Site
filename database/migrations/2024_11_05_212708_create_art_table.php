@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //** create the formate of the database in mysql from VSC */
         Schema::create('art', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('artistname')->nullable();
+            $table->text('about')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
