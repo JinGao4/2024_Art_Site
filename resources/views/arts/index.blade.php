@@ -12,12 +12,12 @@
                     <h3 class="front-semibold text-lg mb-4">List of Arts:</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                         @foreach($arts as $art)
-                            <x-art-card
-                                :title='$art->title'
-                                :image='$art->image'
-                                :artistname='$art->artistname'
-                                :about='$art-> about'
-                            />
+                            <a href="{{route('arts.show',$art)}}">
+                                <x-art-card 
+                                    :title='$art->title'
+                                    :image='$art->image'
+                                />
+                            </a>
                         @endforeach
                     </div>
                 </div>
