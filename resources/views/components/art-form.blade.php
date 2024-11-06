@@ -20,7 +20,7 @@
         @enderror
     </div>
 
-    <div class="mb-4">
+    <!-- <div class="mb-4">
         <label for="image" class="block text-sm font-medium text-gray-700">Art Piece image</label>
         <input 
             typ="file"
@@ -37,7 +37,7 @@
         <div class="mb-4">
             <img src="{{asset($art->image)}}" alt="Art piece" class="w-24 h-32 object-cover">
         </div>
-    @endisset
+    @endisset -->
 
     <div>
         <x-primary-button>
