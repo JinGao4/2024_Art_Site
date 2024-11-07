@@ -8,7 +8,7 @@
 
     <!-- art Image --> 
     <div class="overflow-hidden rounded-lg mb-4 flex justify-center">  <!-- Image is further restricted to a smaller size --> 
-        <img src="{{$image }}" alt="{{ $title }}" class="w-full max-w-xs h-auto object-cover"> <!-- Restrict image to max-w-xs (20rem) and ensure responsiveness --> 
+        <img src="{{asset('images/arts/'. $image) }}" alt="{{ $title }}" class="w-full max-w-xs h-auto object-cover"> <!-- Restrict image to max-w-xs (20rem) and ensure responsiveness --> 
     </div> 
 
     <h3 class="text-gray-800 font-semibold mb-2" style="font-size: 2rem;">artist</h3>

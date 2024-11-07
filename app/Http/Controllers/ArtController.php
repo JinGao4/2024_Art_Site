@@ -33,9 +33,9 @@ class ArtController extends Controller
         /** inputs */
         $request->validate([
             'title'=>'required',
-            'about'=>'required|max: 500',
-            'artistname'=>'required|max: 20',
-            'image'=>'required|imaeg|mimes:jpeg,png,jpg,gif|max:2048',
+            'image'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'about'=>'required',
+            'artistname'=>'required',
         ]);
 
         /** check if it uploaded the image and handle it */
@@ -48,11 +48,9 @@ class ArtController extends Controller
         /** create new art record in database */
         Art::create([
             'title'=> $request->title,
-            'about'=> $request->about,
-            'artistname'=> $request -> artistname,
             'image'=> $imageName, /** store imge URL in DB */
-            'created_at' => now(),
-            'updated_at' => now()
+            'about'=> $request->about,
+            'artistname'=> $request->artistname,
         ]);
 
         /** Redirect to index with a success message */
