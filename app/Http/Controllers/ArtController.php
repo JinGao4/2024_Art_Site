@@ -70,7 +70,7 @@ class ArtController extends Controller
      */
     public function edit(Art $art)
     {
-        //
+        return view('arts.edit', compact('art'));
     }
 
     /**
@@ -78,7 +78,16 @@ class ArtController extends Controller
      */
     public function update(Request $request, Art $art)
     {
-        //
+        $validatedData  = $request->validate([
+            'title' => 'string',
+            'about' => 'string',
+            'artistname' => 'string',
+            'image' => 'string',
+        ]);
+
+        $art->update($validatedData);
+
+        return redirect()->route('arts.index')->with('success', 'art updated successfully');
     }
 
     /**
@@ -86,6 +95,7 @@ class ArtController extends Controller
      */
     public function destroy(Art $art)
     {
-        //
+        $art->delete();
+        return redirect()->route('arts.index')->with('success', 'art delete successfully');
     }
 }

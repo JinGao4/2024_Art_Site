@@ -22,8 +22,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/arts/create', [ArtController::class, 'create'])->name('arts.create');
     Route::get('/arts/{art}', [ArtController::class, 'show'])->name('arts.show');
     Route::post('/arts', [ArtController::class, 'store'])->name('arts.store');
-
-
+    Route::get('/arts/{art}/edit', [ArtController::class, 'edit'])->name('arts.edit');
+    Route::put('/arts/{art}', [ArtController::class, 'update'])->name('arts.update');
+    Route::delete('/arts/{art}', [ArtController::class, 'destroy'])->name('arts.destroy');
 });
 
 require __DIR__.'/auth.php';

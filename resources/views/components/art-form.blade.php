@@ -35,7 +35,7 @@
 
     @isset($art->image)
         <div class="mb-4">
-            <img src="{{asset('images/arts' . $art-image)}}" alt="$art->title" class="w-24 h-32 object-cover">
+            <img src="{{asset('images/arts/' . $art->image)}}" alt="$art->title" class="w-24 h-32 object-cover">
         </div>
     @endisset
 
