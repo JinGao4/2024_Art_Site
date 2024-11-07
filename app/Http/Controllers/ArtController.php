@@ -11,10 +11,24 @@ class ArtController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $arts = Art::all();//Fetch all art
-        return view('arts.index', compact('arts')); // return the view with arts
+        {
+            $title = $request->input('title');
+        
+            $query = Art::query();
+     
+            if (!empty($title)) {
+                $query->where('title', 'LIKE', "%{$title}%");
+            }
+     
+            $arts = $query->get();
+     
+            return view('arts.index', [
+                'arts' => $arts,
+                'title' => $title,  
+            ]);
+        }
     }
 
     /**

@@ -3,6 +3,10 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight ">
             {{ __('Art') }}
         </h2>
+
+        <form method="GET" action="{{ route('arts.index') }}" class="inline-form">
+            <input class="px-2 py-2 bg-red-0 border border-black-500 text-green-700 rounded-md" type="text" name="title" id="title" value="{{ request('title') }}" placeholder="Search title..." >
+        </form>
     </x-slot>
 
     <div class="py-12">
