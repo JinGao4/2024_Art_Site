@@ -14,16 +14,19 @@ class ArtController extends Controller
     public function index(Request $request)
     {
         {
+            //looks for the title, where it search this URL in database
             $title = $request->input('title');
-        
+            // started query builder for the 'Art' model, allowing us to filter and retrieve art records.
             $query = Art::query();
-     
+            //putting a if statment,if the 'title' variable is not empty, meaning the user has entered a search for the title.
             if (!empty($title)) {
                 $query->where('title', 'LIKE', "%{$title}%");
             }
-     
+    
+            // retrieve the matching 'Art' records from the database.
+            // The result will be a collection of 'Art' objects or an empty collection if no found
             $arts = $query->get();
-     
+    
             return view('arts.index', [
                 'arts' => $arts,
                 'title' => $title,  
