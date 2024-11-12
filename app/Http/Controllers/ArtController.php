@@ -23,7 +23,7 @@ class ArtController extends Controller
                 $query->where('title', 'LIKE', "%{$title}%");
             }
     
-            // retrieve the matching 'Art' records from the database.
+            // retrieve the matching 'Art' records from the database
             // The result will be a collection of 'Art' objects or an empty collection if no found
             $arts = $query->get();
     
