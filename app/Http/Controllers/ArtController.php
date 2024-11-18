@@ -14,6 +14,7 @@ class ArtController extends Controller
     public function index(Request $request)
     {
         {
+            $arts = Art::all();
             //looks for the title, where it search this URL in database
             $title = $request->input('title');
             // started query builder for the 'Art' model, allowing us to filter and retrieve art records.
