@@ -39,6 +39,10 @@ class ArtController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->role !=='admin') {
+            return redirect()->route('arts.index')->with('error','Access denied.');
+        }
+
         return view('arts.create');
     }
 

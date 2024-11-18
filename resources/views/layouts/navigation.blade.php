@@ -18,9 +18,12 @@
                     <x-nav-link :href="route('arts.index')" :active="request()->routeIs('arts.index')">
                         {{ __('View Art Pieces') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('arts.create')" :active="request()->routeIs('arts.create')">
-                        {{ __('Upload New Art') }}
-                    </x-nav-link>
+
+                    @if(auth()->user()->role === 'admin')
+                        <x-nav-link :href="route('arts.create')" :active="request()->routeIs('arts.create')">
+                            {{ __('Upload New Art') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
