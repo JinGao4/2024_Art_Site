@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,7 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('reviews', ReviewController::class);
-    Route::post('arts/{art}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::post('/arts/{art}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
     Route::get('/arts', [ArtController::class, 'index'])->name('arts.index');
     Route::get('/arts/create', [ArtController::class, 'create'])->name('arts.create');
