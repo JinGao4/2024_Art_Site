@@ -84,7 +84,8 @@ class ArtController extends Controller
      */
     public function show(Art $art)
     {
-        $art->load('reviews.user');
+
+       // $art->load('reviews.user');
         return view('arts.show',compact('art'));
     }
 

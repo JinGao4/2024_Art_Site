@@ -27,7 +27,7 @@
                     <ul class='mt-4 space-y-4'>
                         @foreach($art->reviews as $review)
                         <li class='bg-gray-100 p-4 rounded-lg'>
-                            <p class='font-semibold'>{{$review->user->name}} ({{$review->create_at->formate('M d, Y')}})</p>
+                            <p class='font-semibold'>{{$review->user->name}} ({{$review->created_at->format('M d, Y')}})</p>
                             <p>Rating:{{$review->rating}} / 5</p>
                             <p>{{$review->comment}}</p>
                         </li>
