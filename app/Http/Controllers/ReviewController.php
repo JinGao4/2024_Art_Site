@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Art;
 use App\Models\Review;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,19 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'rating'=>'required|integer|min:1|max:5',
+            'comment'=>'nullable|string|max:1000',
+        ]);
+
+        $art->reviews()->create([
+            'user_id'=>auth()->id(),
+            'rating'=>$request->input('rating'),
+            'comment'=>$request->input('comment'),
+            'art_id'=>$art->id,
+        ]);
+
+        return redirect()->route('arts.show',$art)->with('success','Review added successfully.');
     }
 
     /**

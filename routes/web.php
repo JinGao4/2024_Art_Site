@@ -18,6 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::resource('reviews', ReviewController::class);
+    Route::post('arts/{art}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+
     Route::get('/arts', [ArtController::class, 'index'])->name('arts.index');
     Route::get('/arts/create', [ArtController::class, 'create'])->name('arts.create');
     Route::get('/arts/{art}', [ArtController::class, 'show'])->name('arts.show');
