@@ -31,7 +31,7 @@
                             <p>Rating:{{$review->rating}} / 5</p>
                             <p>{{$review->comment}}</p>
 
-                            @if ($review->user->is(auth()->user()) || auth()->role === 'admin')
+                            @if ($review->user->is(auth()->user()) || auth()->user()->role === 'admin')
 
                                 <a href="{{ route('reviews.edit',$review)}}" class=>
                                     {{__('Edit Review')}}
