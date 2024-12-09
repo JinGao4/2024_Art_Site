@@ -27,8 +27,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/arts/{art}', [ArtController::class, 'update'])->name('arts.update');
     Route::delete('/arts/{art}', [ArtController::class, 'destroy'])->name('arts.destroy');
 
-    Route::resource('review',ReviewController::class);
+    Route::resource('reviews',ReviewController::class);
     Route::post('arts/{art}/reviews',[ReviewController::class, 'store'])->name('reviews.store');
+    
 
 });
 

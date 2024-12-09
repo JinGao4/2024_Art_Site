@@ -80,6 +80,7 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        //
+        $review->delete();
+        return redirect()->route('arts.index')->with('success', 'art delete successfully');
     }
 }

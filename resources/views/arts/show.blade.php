@@ -37,8 +37,8 @@
                                     {{__('Edit Review')}}
                                 </a>
 
-                                <form method='POST' action="{{route('reviews.destory', $review)}}">
-                                    @crsf
+                                <form method='POST' action="{{route('reviews.destroy', $review)}}">
+                                    @csrf
                                     @method('delete')
                                     <x-danger-button :href="route('reviews.destroy',$review)"
                                                         onclick="event.preventDefault(); this.closest('form').submit();">
