@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Art;
+use App\Models\Genre;
 use Carbon\Carbon;
 
 class ArtSeeder extends Seeder
@@ -15,7 +16,7 @@ class ArtSeeder extends Seeder
     public function run(): void
     {
         $currentTimestamp = Carbon::now();
-        Art::insert([
+        $arts = [
             ['title' => 'Starry Night','artistname' => 'Vincent Van Gogh',
                 'about' => 'The Starry Night is an oil-on-canvas painting by the Dutch Post-Impressionist painter Vincent van Gogh, painted in June 1889. It depicts the view from the east-facing window of his asylum room at Saint-Rémy-de-Provence, just before sunrise, with the addition of an imaginary village.',
                 'image' => 'Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg'
@@ -46,6 +47,15 @@ class ArtSeeder extends Seeder
             'image' => 'figures_with_heart_vinyl.jpg'
             ,'created_at' => $currentTimestamp , 'updated_at' => $currentTimestamp ],
 
-        ]);
+        ];
+
+        foreach ($arts as $artData)
+        {
+            $art = Art::create(array_merge($artData, ['created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp]));
+
+            $genres = Genre::inRandomOrder()->take(2)->pluck('id');
+
+            $art->genres()->attach($genres);
+        }
     }
 }

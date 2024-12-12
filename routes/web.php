@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\GenreController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,8 +30,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('reviews',ReviewController::class);
     Route::post('arts/{art}/reviews',[ReviewController::class, 'store'])->name('reviews.store');
-    
 
+    Route::resource('genres',GenreController::class)->middleware('auth');
 });
 
 require __DIR__.'/auth.php';
