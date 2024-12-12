@@ -18,7 +18,7 @@
                     <x-nav-link :href="route('arts.index')" :active="request()->routeIs('arts.index')">
                         {{ __('View Art Pieces') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('arts.index')" :active="request()->routeIs('genres.index')">
+                    <x-nav-link :href="route('genres.index')" :active="request()->routeIs('genres.index')">
                         {{ __('View Art genres') }}
                     </x-nav-link>
 

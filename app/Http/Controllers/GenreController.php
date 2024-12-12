@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Art;
 use App\Models\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GenreController extends Controller
 {
@@ -12,8 +14,9 @@ class GenreController extends Controller
      */
     public function index()
     {
-        $genres = Genre::with('art')->get();
-        return view('genres.indes', compact('genres'));
+
+        $genres = Genre::with('arts')->get();
+        return view('genres.index', compact('genres'));
     }
 
     /**
@@ -21,12 +24,12 @@ class GenreController extends Controller
      */
     public function create()
     {
-        if (auth->user()->role !== 'admin'){
-            return redirect()->route('arts.index')->with('error','Access denied');
+        if (auth()->user()->role !== 'admin'){
+            return redirect()->route('genre.index')->with('error','Access denied');
         }
 
         $arts = Art::all();
-        return view('genres.create', compact('arts'));
+        return view('genres.create');
     }
 
     /**
@@ -34,31 +37,28 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
-        if (auth->user()->role !== 'admin'){
-            return redirect()->route('arts.index')->with('error','Access denied');
-        }
+        if (auth()->user()->role !== 'admin') {             
+            return redirect()->route('genres.index')->with('error', 'Access denied'); }
 
-        $validated = $request -> validate([
-            'name'=>'required|string',
-            'image'=>'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'about'=>'nullable|string',
-            'art'=>'array',
-        ]);
+            $validated = $request->validate([             
+                'name' => 'required|string|max:255',             
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',             
+                'about' => 'nullable|string|max:500',             
+                'arts' => 'array', ]);
 
-        if ($request->hasFile('image')){
-            $imageName = time().'.'.$request->image->extension();
-
-            $request->image->move(public_path('image/genres'),$imageName);
-
-            $validated['image']=$imageName;
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images/arts'), $imageName);
+            $validated['image'] = 'images/arts/' . $imageName;
         }
 
         $genre = Genre::create($validated);
 
-        if($request->has('arts')){
-            $genre->arts()->attach($request->arts);
+        if ($request->has('arts')) {
+            $genre->arts()->sync($request->arts);
         }
-        return redirect()->route('genres.index')->with('success','genre created successfully.');
+
+        return redirect()->route('genres.index')->with('success', 'Genre created successfully.');
     }
 
     /**
