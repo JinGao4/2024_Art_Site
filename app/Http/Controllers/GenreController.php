@@ -56,8 +56,9 @@ class GenreController extends Controller
         $genre = Genre::create($validated);
 
         if($request->has('arts')){
-            $genre->arts()->attach()
+            $genre->arts()->attach($request->arts);
         }
+        return redirect()->route('genres.index')->with('success','genre created successfully.');
     }
 
     /**
@@ -65,7 +66,8 @@ class GenreController extends Controller
      */
     public function show(Genre $genre)
     {
-        //
+        $genre->load('arts');
+        return (view('genres.show',compact('genre')));
     }
 
     /**
@@ -73,7 +75,9 @@ class GenreController extends Controller
      */
     public function edit(Genre $genre)
     {
-        //
+        $arts = Art::all();
+        $genreArts = $genre->arts->pluck('id')->toArray();
+        return view('genres.edit', compact('genre','arts','genreArt'));
     }
 
     /**
@@ -81,7 +85,19 @@ class GenreController extends Controller
      */
     public function update(Request $request, Genre $genre)
     {
-        //
+        $validated = $request -> validate([
+            'name'=>'required|string',
+            'image'=>'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'about'=>'nullable|string',
+            'art'=>'array',
+        ]);
+
+        $genre ->update($validated);
+
+        if($request->has('arts')){
+            $genre->arts()->attach($request->arts);
+        }
+        return redirect()->route('genres.index')->with('success','genre created successfully.');
     }
 
     /**
@@ -89,6 +105,8 @@ class GenreController extends Controller
      */
     public function destroy(Genre $genre)
     {
-        //
+        $genre->arts()->detach();
+        $genre->delete();
+        return redirect()->route('genres.index')->with('success','genre deleted successfully.');
     }
 }
