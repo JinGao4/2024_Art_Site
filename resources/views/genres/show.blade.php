@@ -18,7 +18,19 @@
                         :image='$genre->image'
                     />
 
-
+                    <div class="container">
+                        <h2 class="text-xl mt-4 font-semibold">Arts in this Genre:</h2>
+                        <div class="grid grid-cols-3 gap-4 mt-4">
+                            @forelse ($genre->arts as $art)
+                            <x-art-card 
+                                :title="$art->title" 
+                                :image="$art->image" 
+                            />
+                            @empty
+                        <p>There are no performances associated with this genre..</p>
+                        @endforelse
+                        </div>
+                    </div>
                     
                     </div>
                 </div>
